@@ -1,16 +1,17 @@
 extends layout.pug
 
 block content 
-  .container.bg-dark.align-middle.p-3
+
+  .container.bg-light.m-0.p-2
     form(method='post', id='login')
-      label(for="username").text-light Username
+      label(for="username").text-dark Username
       br/
       input(type='text', name="username" id="username")
 
       br/
       <small></small>
       br/
-      label(for="password").text-light Password 
+      label(for="password").text-dark Password 
       br/
       input(type='text', name="password" id="password")
       br/
@@ -20,6 +21,6 @@ block content
       br/
       <small></small>
       br/
-      a(href="/signup").text-light.text-decoration-none Sign up instead
+      a(href="/signup").text-dark.text-decoration-none Sign up instead
     
     script(src='javascripts/login.js')
