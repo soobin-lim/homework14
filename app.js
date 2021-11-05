@@ -10,24 +10,26 @@ var loginRouter = require('./routes/login');
 var logoutRouter = require('./routes/logout');
 var signupRouter = require('./routes/signup');
 
-//Sequelize--------------------------------------------------------------------------------
-require('dotenv').config()
-const { Sequelize } = require('sequelize');
-const mysql = require('mysql2');
-// Option 2: Passing parameters separately (other dialects)
-const sequelize = new Sequelize(process.env.DB_HOST, process.env.DB_USER, process.env.DB_PASS, {
-  host: 'localhost',
-  dialect: 'mysql' /* one of 'mysql' | 'mariadb' | 'postgres' | 'mssql' */
-});
-const sequelizeConnectionTest = async () => {
-  try {
-    await sequelize.authenticate();
-    console.log('Sequelize - Connection has been established successfully.');
-  } catch (error) {
-    console.error('Sequelize - Unable to connect to the database:', error);
-  }
-}
-sequelizeConnectionTest();
+const { User, Blog, Tag } = require('./models')
+
+// //Sequelize--------------------------------------------------------------------------------
+// require('dotenv').config()
+// const { Sequelize } = require('sequelize');
+// const mysql = require('mysql2');
+// // Option 2: Passing parameters separately (other dialects)
+// const sequelize = new Sequelize(process.env.DB_HOST, process.env.DB_USER, process.env.DB_PASS, {
+//   host: 'localhost',
+//   dialect: 'mysql' /* one of 'mysql' | 'mariadb' | 'postgres' | 'mssql' */
+// });
+// const sequelizeConnectionTest = async () => {
+//   try {
+//     await sequelize.authenticate();
+//     console.log('Sequelize - Connection has been established successfully.');
+//   } catch (error) {
+//     console.error('Sequelize - Unable to connect to the database:', error);
+//   }
+// }
+// sequelizeConnectionTest();
 //Sequelize--------------------------------------------------------------------------------
 
 var app = express({ path: '.env' });
@@ -59,6 +61,7 @@ app.use('/login', loginRouter);
 app.use('/logout', logoutRouter);
 app.use('/dashboard', dashboardRouter);
 app.use('/signup', signupRouter);
+app.use(require('./controllers/index')); // using controller
 
 
 // catch 404 and forward to error handler
