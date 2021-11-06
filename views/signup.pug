@@ -2,7 +2,7 @@ extends layout.pug
 
 block content 
   .container.bg-light.m-0.p-2
-    form(method='post', id='login')
+    form(method='post', id='signup')
       label(for="username").text-dark Username
       br/
       input(type='text', name="username" id="username")
@@ -22,4 +22,4 @@ block content
       br/
       a(href="/login").text-dark.text-decoration-none Login instead
     
-    script(src='javascripts/login.js')
+  script(src='javascripts/signup.js')

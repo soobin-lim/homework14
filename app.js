@@ -3,14 +3,9 @@ var express = require('express');
 var path = require('path');
 var cookieParser = require('cookie-parser');
 var logger = require('morgan');
+const session = require('express-session');
 
-var homeRouter = require('./routes/home');
-var dashboardRouter = require('./routes/dashboard');
-var loginRouter = require('./routes/login');
-var logoutRouter = require('./routes/logout');
-var signupRouter = require('./routes/signup');
-
-const { User, Blog, Tag } = require('./models')
+const passport = require('passport')
 
 // //Sequelize--------------------------------------------------------------------------------
 // require('dotenv').config()
@@ -31,8 +26,17 @@ const { User, Blog, Tag } = require('./models')
 // }
 // sequelizeConnectionTest();
 //Sequelize--------------------------------------------------------------------------------
+const sequelize = require('./config/connection')
+var app = express(); //{ path: '.env' }
 
-var app = express({ path: '.env' });
+// Set up sessions
+const sess = {
+  secret: 'Super secret secret',
+  resave: false,
+  saveUninitialized: false,
+};
+
+app.use(session(sess));
 
 app.use('/css', express.static(path.join(__dirname, 'node_modules/bootstrap/dist/css')))
 app.use('/js', express.static(path.join(__dirname, 'node_modules/bootstrap/dist/js')))
@@ -43,8 +47,6 @@ app.set('views', path.join(__dirname, 'views'));
 app.set('view engine', 'pug');
 app.set('views', './views');
 
-console.log(__dirname);
-
 app.use(logger('dev'));
 app.use(express.json());
 app.use(express.urlencoded({ extended: false }));
@@ -52,17 +54,13 @@ app.use(cookieParser());
 app.use(express.static(path.join(__dirname, 'public')));
 app.use('/css2', express.static(path.join(__dirname, 'public/stylesheets/')))
 
+// using controller(router)
+app.use(require('./controllers')); 
 
-console.log(__dirname);
-
-app.use('/', homeRouter);
-app.use('/home', homeRouter);
-app.use('/login', loginRouter);
-app.use('/logout', logoutRouter);
-app.use('/dashboard', dashboardRouter);
-app.use('/signup', signupRouter);
-app.use(require('./controllers/index')); // using controller
-
+sequelize.sync({ force: true })
+  .then(() => {
+    console.log(`Database & tables created!`)
+  }).catch(err => console.log('sequelize sync force error  :  '+err))
 
 // catch 404 and forward to error handler
 app.use(function (req, res, next) {

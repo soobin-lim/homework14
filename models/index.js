@@ -2,28 +2,7 @@ const Sequelize = require('sequelize')
 const UserModel = require('./user')
 const BlogModel = require('./blog')
 const TagModel = require('./tag')
-require('dotenv').config();
-
-const sequelize = new Sequelize(
-  process.env.DB_NAME,
-  process.env.DB_USER,
-  process.env.DB_PASS,
-  {
-    host: 'localhost',
-    dialect: 'mysql',
-    port: 3306,
-  }
-);
-console.log(sequelize)
-const sequelizeConnectionTest = async () => {
-  try {
-    await sequelize.authenticate();
-    console.log('Sequelize - Connection has been established successfully.');
-  } catch (error) {
-    console.error('Sequelize - Unable to connect to the database:', error);
-  }
-}
-sequelizeConnectionTest();
+const sequelize = require('../config/connection')
 
 const User = UserModel(sequelize, Sequelize)
 // BlogTag will be our way of tracking relationship between Blog and Tag models
@@ -37,14 +16,8 @@ Blog.belongsToMany(Tag, { through: BlogTag, unique: false })
 Tag.belongsToMany(Blog, { through: BlogTag, unique: false })
 Blog.belongsTo(User);
 
-sequelize.sync({ force: true })
-  .then(() => {
-    console.log(`Database & tables created!`)
-  })
-
 module.exports = {
   User,
   Blog,
   Tag
 }
-

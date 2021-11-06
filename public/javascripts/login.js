@@ -18,6 +18,20 @@ form.addEventListener('submit', (event)=>{
   if (nameValid && emailValid) {
 		alert("Demo only. No form was posted.");
 	}
+
+	const response = await fetch('/api/users/login', {
+    method: 'POST',
+    body: JSON.stringify({ fullName, emailAddress }),
+    headers: { 'Content-Type': 'application/json' },
+  });
+
+  if (response.ok) {
+    alert('Successfully log in')
+    document.location.replace('/');
+  } else {
+    alert('Failed to sign up');
+  }
+
 });
 
 // show a message with a type of the input

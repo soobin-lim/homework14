@@ -20,3 +20,13 @@ So I decided to use pug files for views folder
   https://stackoverflow.com/questions/30266221/node-js-mysql-error-connect-econnrefused
   =>
   socketPath: '/Applications/MAMP/tmp/mysql/mysql.sock'
+
+  mysql client doesn't recognize localhost as 127.0.0.1 today.
+  Why?
+  This caused issues in setting up a local dev environment on MacOS.
+  https://stackoverflow.com/questions/19712307/mysql-localhost-127-0-0-1
+  https://www.tecmint.com/fix-mysql-error-1819-hy000/
+
+  mysql clients treat localhost and 127.0.0.1 differently, see
+
+  https://serverfault.com/questions/295285/mysql-cannot-connect-via-localhost-only-127-0-0-1/295300#295300
