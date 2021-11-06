@@ -6,5 +6,10 @@ module.exports = (sequelize, type) => {
         autoIncrement: true
       },
       text: type.STRING
+  },
+  {
+    timestamps: false,
+    freezeTableName: true,
+    underscored: true,
   })
 }
