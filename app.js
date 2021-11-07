@@ -7,27 +7,8 @@ const session = require('express-session');
 
 const passport = require('passport')
 
-// //Sequelize--------------------------------------------------------------------------------
-// require('dotenv').config()
-// const { Sequelize } = require('sequelize');
-// const mysql = require('mysql2');
-// // Option 2: Passing parameters separately (other dialects)
-// const sequelize = new Sequelize(process.env.DB_HOST, process.env.DB_USER, process.env.DB_PASS, {
-//   host: 'localhost',
-//   dialect: 'mysql' /* one of 'mysql' | 'mariadb' | 'postgres' | 'mssql' */
-// });
-// const sequelizeConnectionTest = async () => {
-//   try {
-//     await sequelize.authenticate();
-//     console.log('Sequelize - Connection has been established successfully.');
-//   } catch (error) {
-//     console.error('Sequelize - Unable to connect to the database:', error);
-//   }
-// }
-// sequelizeConnectionTest();
-//Sequelize--------------------------------------------------------------------------------
 const sequelize = require('./config/connection')
-var app = express(); //{ path: '.env' }
+var app = express(); 
 
 // Set up sessions
 const sess = {
@@ -57,7 +38,7 @@ app.use('/css2', express.static(path.join(__dirname, 'public/stylesheets/')))
 // using controller(router)
 app.use(require('./controllers')); 
 
-sequelize.sync({ force: true })
+sequelize.sync({ force: false })
   .then(() => {
     console.log(`Database & tables created!`)
   }).catch(err => console.log('sequelize sync force error  :  '+err))

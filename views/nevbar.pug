@@ -1,8 +1,10 @@
 .d-flex.bg-dark.pb-0.m-0
     p.px-2(style="height: fit-content"): a(href="/home").text-light.text-decoration-none.pb-0 Home
     p.px-2(style="height: fit-content"): a(href="/dashboard").text-light.text-decoration-none.pb-0 Dashboard 
-    p.px-2(style="height: fit-content"): a(href="/login").text-light.text-decoration-none.pb-0 Login 
-    p.px-2(style="height: fit-content"): a(href="/logout").text-light.text-decoration-none.pb-0 Logout
+    if username==undefined || username==''
+      p.px-2(style="height: fit-content"): a(href="/login").text-light.text-decoration-none.pb-0 Login 
+    else
+      p.px-2(style="height: fit-content"): a(href="/logout").text-light.text-decoration-none.pb-0 Logout
 
 .d-flex.flex-row.bg-dark.p-1
   .p-2.bg-light.rounded.shadow.media-body.align-self-center

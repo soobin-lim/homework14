@@ -1,8 +1,8 @@
 const Sequelize = require('sequelize')
+const sequelize = require('../config/connection')
 const UserModel = require('./user')
 const BlogModel = require('./blog')
 const TagModel = require('./tag')
-const sequelize = require('../config/connection')
 
 const User = UserModel;
 // BlogTag will be our way of tracking relationship between Blog and Tag models

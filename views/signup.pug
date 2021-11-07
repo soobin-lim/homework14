@@ -3,23 +3,23 @@ extends layout.pug
 block content 
   .container.bg-light.m-0.p-2
     form(method='post', id='signup')
-      label(for="username").text-dark Username
+      label(for="username" class='container-fluid p-0').text-dark Username
       br/
-      input(type='text', name="username" id="username")
+      input(type='text', name="username" id="username" class='container-fluid p-0')
 
       br/
       <small></small>
       br/
-      label(for="password").text-dark Password 
+      label(for="password" class='container-fluid p-0').text-dark Password 
       br/
-      input(type='text', name="password" id="password")
-      br/
-      <small></small>
-      br/
-      button(type='submit') Sign up 
+      input(type='text', name="password" id="password" class='container-fluid p-0')
       br/
       <small></small>
       br/
-      a(href="/login").text-dark.text-decoration-none Login instead
+      button(type='submit' class='container-fluid p-0 bg-dark text-light') Sign up 
+      br/
+      <small></small>
+      br/
+      a(href="/login" class='container-fluid p-0').text-dark.text-decoration-none Login instead
     
   script(src='javascripts/signup.js')

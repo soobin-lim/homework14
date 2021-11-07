@@ -1,27 +1,28 @@
-const form = document.getElementsById('login');
-const name1 = form.elements['name'];
-const email1 = form.elements['email'];
-
-let fullName = name1.value;
-let emailAddress = email1.value;
+const form = document.getElementById('login');
+const name1 = form.elements['username'];
+const email1 = form.elements['password'];
 
 const NAME_REQUIRED = "Please enter your name";
-const EMAIL_REQUIRED = "Please enter your email";
-const EMAIL_INVALID = "Please enter a correct email address format";
+const PASSWORD_REQUIRED = "Please enter your password";
+const PASSWORD_INVALID = "Please enter a correct password format";
 
-form.addEventListener('submit', (event)=>{
+form.addEventListener('submit', async (event)=>{
   event.preventDefault();
   
-  let nameValid = hasValue(form.elements["name"], NAME_REQUIRED);
-	let emailValid = validateEmail(form.elements["email"], EMAIL_REQUIRED, EMAIL_INVALID);
+	let username = name1.value;
+	let password = email1.value;
 
-  if (nameValid && emailValid) {
-		alert("Demo only. No form was posted.");
+  let usernameValid = hasValue(form.elements["username"], NAME_REQUIRED);
+	let passwordValid = validatePassword(form.elements["password"], PASSWORD_REQUIRED, PASSWORD_INVALID);
+
+  if (usernameValid && passwordValid) {
+		alert("Please enter Username and Password");
+		return true;
 	}
 
 	const response = await fetch('/api/users/login', {
     method: 'POST',
-    body: JSON.stringify({ fullName, emailAddress }),
+    body: JSON.stringify({ username, password }),
     headers: { 'Content-Type': 'application/json' },
   });
 
@@ -59,10 +60,11 @@ function hasValue(input, message) {
 	return showSuccess(input);
 }
 
-function validateEmail(input, requiredMsg, invalidMsg) {
+function validatePassword(input, requiredMsg, invalidMsg) {
 	// check if the value is not empty
 	if (!hasValue(input, requiredMsg)) {
-		return false;
+		console.log("password doesn't have value")
+		return true;
 	}
 	// validate email format
 	const emailRegex =
@@ -70,7 +72,8 @@ function validateEmail(input, requiredMsg, invalidMsg) {
 
 	const email = input.value.trim();
 	if (!emailRegex.test(email)) {
-		return showError(input, invalidMsg);
+		// return showError(input, invalidMsg);
+		return false;
 	}
-	return true;
+	return false;
 }

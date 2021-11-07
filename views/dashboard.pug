@@ -1,8 +1,28 @@
 extends layout.pug
 
 block content
-  .primary
-    h1.text-dark.text-decoration-none.align-middle= 'Dashboard'
-    p.text-dark.text-decoration-none.align-middle Welcome to DashBoard
+  .primary.p-3(id='newpost')
+    form(method='post', id='dashboard_create')
+      h2.text-dark.text-decoration-none.align-middle= 'Create New Post'
+      label(for="title" class='container-fluid p-0').text-dark Title
+      br/
+      input(type='text', name="title" id="title" class='container-fluid p-0')
+
+      br/
+      <small></small>
+      br/
+      label(for="content" class='container-fluid p-0').text-dark Content 
+      br/
+      input(type='text', name="content" id="content" class='container-fluid p-0')
+      br/
+      <small></small>
+      br/
+      button(type='submit' class='container-fluid p-0 bg-dark text-light') Create 
+
+    .primary.p-3(id='dashboard')
+  
   #footer 
-    button.bg-dark.text-light.border-0(style="width: 200px; height: 70px") NewPost
+    button.bg-dark.text-light.border-0(style="width: 200px; height: 70px" id="newpost_btn") + NewPost
+
+  script(src='javascripts/dashboard.js')
+  

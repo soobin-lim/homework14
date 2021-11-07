@@ -5,11 +5,7 @@ module.exports = (sequelize, type) => {
         primaryKey: true,
         autoIncrement: true
       },
-      text: type.STRING
-  },
-  {
-    timestamps: false,
-    freezeTableName: true,
-    underscored: true,
+      title: type.STRING,
+      content: type.STRING
   })
 }

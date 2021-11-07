@@ -16,6 +16,12 @@ So I decided to use pug files for views folder
 
 
 # Errors
+My Git hub : 
+
+  MVC Homework Github
+  https://github.com/soobin-lim/homework14.git
+    Same code as Activities in 14.MVC
+
   original: Error: connect ECONNREFUSED ::1:3306
   https://stackoverflow.com/questions/30266221/node-js-mysql-error-connect-econnrefused
   =>

@@ -1,27 +1,36 @@
-const form = document.getElementsById('signup');
+const form = document.getElementById('signup');
 const name1 = form.elements['username'];
 const password1 = form.elements['password'];
 
-let username = name1.value;
-let password1 = password1.value;
+
+console.log(form)
+console.log(name1)
+console.log(password1)
+
+
 
 const NAME_REQUIRED = "Please enter your name";
 const PASSWORD_REQUIRED = "Please enter your password";
 const PASSWORD_INVALID = "Please enter a correct password";
 
-form.addEventListener('submit', (event)=>{
+form.addEventListener('submit', async (event)=>{
   event.preventDefault();
   
-  let nameValid = hasValue(form.elements["name"], NAME_REQUIRED);
-	let emailValid = validateEmail(form.elements["email"], PASSWORD_REQUIRED, PASSWORD_INVALID);
+	let username = name1.value;
+	let password = password1.value;
+	console.log(username, password)
 
-  if (nameValid && emailValid) {
-		alert("Please fill name and email");
+  let nameValid = hasValue(form.elements["username"], NAME_REQUIRED);
+	let passwordValid = validatePassword(form.elements["password"], PASSWORD_REQUIRED, PASSWORD_INVALID);
+
+  if (nameValid && passwordValid) {
+		alert("Name and Password Validation");
+		return true;
 	}
 
   const response = await fetch('/api/users/signup', {
     method: 'POST',
-    body: JSON.stringify({ username, password: password1 }),
+    body: JSON.stringify({ username, password }),
     headers: { 'Content-Type': 'application/json' },
   });
 
@@ -58,10 +67,11 @@ function hasValue(input, message) {
 	return showSuccess(input);
 }
 
-function validateEmail(input, requiredMsg, invalidMsg) {
+function validatePassword(input, requiredMsg, invalidMsg) {
 	// check if the value is not empty
 	if (!hasValue(input, requiredMsg)) {
-		return false;
+		console.log("password doesn't have value")
+		return true;
 	}
 	// validate email format
 	const emailRegex =
@@ -69,7 +79,8 @@ function validateEmail(input, requiredMsg, invalidMsg) {
 
 	const email = input.value.trim();
 	if (!emailRegex.test(email)) {
-		return showError(input, invalidMsg);
+		// return showError(input, invalidMsg);
+		return false;
 	}
-	return true;
+	return false;
 }

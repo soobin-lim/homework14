@@ -1,7 +1,44 @@
 extends layout.pug
 
 block content
-  .primary.pl-1
+  
+  .primary.pl-1(id='main')
     h1.text-dark.text-decoration-none.align-middle= title
-    p.text-dark.text-decoration-none.align-middle Welcome to #{title}
+    p.text-dark.text-decoration-none.align-middle Welcome #{username}
+  
+  script(type='text/javascript').
+    var blogs2 = JSON.parse('!{blogs}')
+    var mainDiv = document.getElementById('main')
+    //- console.log(blogs2.length)
+    for (blog of blogs2){
+      var blogContainer = document.createElement('div');
+      blogContainer.className = 'container-fluid mb-3';
+      var rowContainer = document.createElement('div');
+      rowContainer.className = 'row';
+
+      var titleDiv = document.createElement('div');
+      titleDiv.className = 'text-light bg-dark h5 m-0 col';
+      var usernameDiv = document.createElement('div');
+      usernameDiv.className = 'text-light bg-dark h6 m-0 col';
+      var usernameP = document.createElement('p');
+      usernameP.className = 'text-end m-0';
+      var contentDiv = document.createElement('div');
+      contentDiv.className = 'border border-dark h5 m-0 w-100';
+      titleDiv.innerHTML = blog[0];
+      //- usernameDiv.innerHTML = 'Posted by ' + blog[1];
+      usernameP.innerHTML = 'Posted by ' + blog[1];
+      contentDiv.innerHTML = blog[2];
+      //- div.className = 'border pad';
+
+      rowContainer.appendChild(titleDiv);
+      usernameDiv.appendChild(usernameP);
+      rowContainer.appendChild(usernameDiv);
+      rowContainer.appendChild(contentDiv);
+
+      blogContainer.appendChild(rowContainer);
+
+      mainDiv.appendChild(blogContainer);
+    }
+
+
 

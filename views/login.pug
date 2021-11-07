@@ -4,23 +4,23 @@ block content
 
   .container.bg-light.m-0.p-2
     form(method='post', id='login')
-      label(for="username").text-dark Username
+      label(for="username" class='container-fluid p-0').text-dark Username
       br/
-      input(type='text', name="username" id="username")
+      input(type='text', name="username" id="username" class='container-fluid p-0')
 
       br/
       <small></small>
       br/
-      label(for="password").text-dark Password 
+      label(for="password" class='container-fluid p-0').text-dark Password 
       br/
-      input(type='text', name="password" id="password")
+      input(type='text', name="password" id="password" class='container-fluid p-0')
       br/
       <small></small>
       br/
-      button(type='submit') Login 
+      button(type='submit' class='container-fluid p-0 bg-dark text-light') Login 
       br/
       <small></small>
       br/
       a(href="/signup").text-dark.text-decoration-none Sign up instead
     
-    script(src='javascripts/login.js')
+  script(src='javascripts/login.js')
