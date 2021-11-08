@@ -17,7 +17,9 @@ router.get('/', async function (req, res, next) {
       tmp.push(blog.user.username);
       tmp.push(blog.content);
       tmp.push(blog.id);
-      tmp.push(blog.createdAt);
+      // tmp.push(blog.createdAt);
+      tmp.push(blog.updatedAt);
+
       // console.log(tmp)
       console.log("blog.id : " + blog.id)
       let comments = await Tag.findAll(
