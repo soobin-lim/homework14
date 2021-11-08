@@ -29,6 +29,8 @@ block content
       usernameDiv.className = 'text-light bg-dark h6 m-0 col';
       var usernameP = document.createElement('p');
       usernameP.className = 'text-end m-0';
+      var createdAtP = document.createElement('p');
+      createdAtP.className = 'text-end m-0';
       var contentDiv = document.createElement('div');
       contentDiv.className = 'border border-dark h5 m-0 w-100';
       //- usernameDiv.innerHTML = 'Posted by ' + blog[1];
@@ -37,15 +39,17 @@ block content
       
       rowContainer.dataset.blogid = blog[3];
       //- div.className = 'border pad';
-      
+      var createdAt = blog[4];
+      createdAtP.innerHTML = createdAt;
 
       titleDiv.appendChild(titleA);
       rowContainer.appendChild(titleDiv);
       usernameDiv.appendChild(usernameP);
+      usernameDiv.appendChild(createdAtP);
       rowContainer.appendChild(usernameDiv);
       rowContainer.appendChild(contentDiv);
 
-      var comments = blog[4];
+      var comments = blog[5];
       //- console.log(comments.length);
       
       for (comment of comments) {
