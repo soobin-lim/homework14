@@ -1,5 +1,5 @@
 var express = require('express');
-const { Blog, User } = require('../models')
+const { Blog, User, Tag } = require('../models');
 var router = express.Router();
 
 /* GET home page. */
@@ -11,13 +11,46 @@ router.get('/', async function (req, res, next) {
   })
 
   if (blogs) {
-    blogs.map(blog => {
+    for (blog of blogs) {
       let tmp = [];
       tmp.push(blog.title);
       tmp.push(blog.user.username);
       tmp.push(blog.content);
+      tmp.push(blog.id);
+      // console.log(tmp)
+      console.log("blog.id : " + blog.id)
+      let comments = await Tag.findAll(
+        {
+          include: [{
+            model: Blog,
+            through: {
+              where: {
+                blogId: blog.id
+                // if Tag.findall(comment) has blogs (blog.id)
+              }
+            }
+          }],
+        }
+      );
+      // if there are comments for blog.id 
+      // I want to add information to res.render(home)
+      let tmp2 = [];
+      for (comment of comments) {
+        // if comment has blogs (blog.id)
+        if (comment.blogs.length > 0) {
+          console.log(comment.id)
+          console.log(comment.tag)
+          tmp2.push(comment.tag)
+          // console.log(comment.blogs.title)
+          // console.log(comment.blogs.content)
+          // console.log(comment.blogs.userId)
+          // console.log(comment.blogs.blog_tag)
+        }
+      }
+      // console.log(' how many : comments detail : ' + JSON.stringify(comments));
+      tmp.push(tmp2);
       blogsArray.push(tmp);
-    })
+    }
   }
 
   console.log(JSON.stringify(blogsArray));

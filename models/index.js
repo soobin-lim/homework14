@@ -19,5 +19,6 @@ Blog.belongsTo(User);
 module.exports = {
   User,
   Blog,
-  Tag
+  Tag,
+  BlogTag
 }

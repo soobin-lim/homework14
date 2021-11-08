@@ -1,5 +1,46 @@
 const router = require('express').Router();
-const { User, Blog, Tag } = require('../../models');
+const { User, Blog, Tag, BlogTag } = require('../../models');
+
+// create a blog post
+router.post('/createcomment', (req, res) => {
+  const body = req.body
+  console.log(body)
+  // Creat Tag
+  Tag.create(
+    {
+      tag: body.comment,
+      user: 'user1'
+    }
+  )
+    .then(
+      // 
+      createdTag => {
+        var tagId = createdTag.id;
+        var blogId = body.blogId;
+        // Create BlogTag
+        BlogTag.create(
+          {
+            tagId: tagId,
+            blogId: blogId
+          }
+        )
+      }
+    )
+    .then(
+      res.status(200)
+        .json(
+          {
+            message: 'Tag and BlogTag created successfully'
+          }
+        )
+    );
+
+})
+// .then(blog => Promise.all(tags).then(storedTags => blog.addTags(storedTags)).then(() => blog))
+// .then(blog => Blog.findOne({ where: { id: blog.id }, include: [User, Tag] }))
+// .then(blogWithAssociations => res.json(blogWithAssociations))
+// .catch(err => res.status(400).json({ err: `User with username = [${username}] doesn\'t exist.` }))
+
 
 // create a blog post
 router.post('/create', (req, res) => {
@@ -40,7 +81,7 @@ router.delete('/delete', (req, res) => {
 })
 
 router.get('/all', (req, res) => {
-    Blog.findAll().then(blogs => res.json(blogs))
-  })
+  Blog.findAll().then(blogs => res.json(blogs))
+})
 
 module.exports = router;

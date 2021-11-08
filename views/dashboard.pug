@@ -1,6 +1,8 @@
 extends layout.pug
 
 block content
+  .primary.p-3(id='updateanddelete')
+
   .primary.p-3(id='newpost')
     form(method='post', id='dashboard_create')
       h2.text-dark.text-decoration-none.align-middle= 'Create New Post'
@@ -20,9 +22,62 @@ block content
       button(type='submit' class='container-fluid p-0 bg-dark text-light') Create 
 
     .primary.p-3(id='dashboard')
-  
+  .primary.p-3(id='main')
   #footer 
     button.bg-dark.text-light.border-0(style="width: 200px; height: 70px" id="newpost_btn") + NewPost
-
   script(src='javascripts/dashboard.js')
+  script(type='text/javascript').
+    var blogs2 = JSON.parse('!{blogs}')
+    var mainDiv = document.getElementById('main')
+    //- console.log(blogs2.length)
+    for (blog of blogs2){
+      var blogContainer = document.createElement('div');
+      blogContainer.className = 'container-fluid mb-3';
+      var rowContainer = document.createElement('div');
+      rowContainer.className = 'row';
+      var titleDiv = document.createElement('div');
+      titleDiv.className = 'text-light bg-dark h5 m-0 col';
+      var titleA = document.createElement('a');
+      titleA.style.textDecoration = 'none'
+      titleA.className = 'text-light m-0';
+      titleA.innerHTML = blog[0];
+      //- titleA.href="my link to .. custom"
+      var usernameDiv = document.createElement('div');
+      usernameDiv.className = 'text-light bg-dark h6 m-0 col';
+      var usernameP = document.createElement('p');
+      usernameP.className = 'text-end m-0';
+      var createdAtP = document.createElement('p');
+      createdAtP.className = 'text-end m-0';
+      var contentDiv = document.createElement('div');
+      contentDiv.className = 'border border-dark h5 m-0 w-100';
+      //- usernameDiv.innerHTML = 'Posted by ' + blog[1];
+      usernameP.innerHTML = 'Posted by ' + blog[1];
+      var createdAt = blog[4];
+      console.log(createdAt) 
+      createdAtP.innerHTML = createdAt;
+      contentDiv.innerHTML = blog[2];
+      
+      rowContainer.dataset.blogid = blog[3];
+      //- div.className = 'border pad';
+      
+
+      titleDiv.appendChild(titleA);
+      rowContainer.appendChild(titleDiv);
+      usernameDiv.appendChild(usernameP);
+      usernameDiv.appendChild(createdAtP);
+      rowContainer.appendChild(usernameDiv);
+      //- rowContainer.appendChild(contentDiv);
+      
+      var comments = blog[5];
+      //- console.log(comments.length);
+      
+      for (comment of comments) {
+        var commentDiv = document.createElement('div');
+        commentDiv.innerHTML = comment;  
+        //- rowContainer.appendChild(commentDiv)
+      }
+
+      blogContainer.appendChild(rowContainer);
+      mainDiv.appendChild(blogContainer);
+    }
   

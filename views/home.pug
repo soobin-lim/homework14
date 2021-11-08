@@ -6,7 +6,8 @@ block content
   
     //- h1.text-dark.text-decoration-none.align-middle= title
     //- p.text-dark.text-decoration-none.align-middle Welcome #{username}
-    
+  script(type='text/javascript').
+    var username = `#{{username}}`;
   script(src='javascripts/home.js')
   script(type='text/javascript').
     var blogs2 = JSON.parse('!{blogs}')
@@ -17,7 +18,6 @@ block content
       blogContainer.className = 'container-fluid mb-3';
       var rowContainer = document.createElement('div');
       rowContainer.className = 'row';
-
       var titleDiv = document.createElement('div');
       titleDiv.className = 'text-light bg-dark h5 m-0 col';
       var titleA = document.createElement('a');
@@ -34,7 +34,10 @@ block content
       //- usernameDiv.innerHTML = 'Posted by ' + blog[1];
       usernameP.innerHTML = 'Posted by ' + blog[1];
       contentDiv.innerHTML = blog[2];
+      
+      rowContainer.dataset.blogid = blog[3];
       //- div.className = 'border pad';
+      
 
       titleDiv.appendChild(titleA);
       rowContainer.appendChild(titleDiv);
@@ -42,8 +45,16 @@ block content
       rowContainer.appendChild(usernameDiv);
       rowContainer.appendChild(contentDiv);
 
-      blogContainer.appendChild(rowContainer);
+      var comments = blog[4];
+      //- console.log(comments.length);
+      
+      for (comment of comments) {
+        var commentDiv = document.createElement('div');
+        commentDiv.innerHTML = comment;  
+        rowContainer.appendChild(commentDiv)
+      }
 
+      blogContainer.appendChild(rowContainer);
       mainDiv.appendChild(blogContainer);
     }
 
