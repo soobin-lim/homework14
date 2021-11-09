@@ -4,6 +4,7 @@ var router = express.Router();
 /* GET home page. */
 router.get('/', function (req, res, next) {
   let goodByeName = req.session.username;
+  req.session.logged_in = false;
   req.session.username = undefined;
   if (goodByeName == ''){
     res.redirect('/login')

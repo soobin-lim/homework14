@@ -1,37 +1,39 @@
 const form = document.getElementById('login');
-const name1 = form.elements['username'];
-const email1 = form.elements['password'];
 
-const NAME_REQUIRED = "Please enter your name";
-const PASSWORD_REQUIRED = "Please enter your password";
-const PASSWORD_INVALID = "Please enter a correct password format";
+form.addEventListener('submit', async (event) => {
 
-form.addEventListener('submit', async (event)=>{
-  event.preventDefault();
-  
+	event.preventDefault();
+
+	const name1 = form.elements['username'];
+	const email1 = form.elements['password'];
+
+	const NAME_REQUIRED = "Please enter your name";
+	const PASSWORD_REQUIRED = "Please enter your password";
+	const PASSWORD_INVALID = "Please enter a correct password format";
+
 	let username = name1.value;
 	let password = email1.value;
 
-  let usernameValid = hasValue(form.elements["username"], NAME_REQUIRED);
+	let usernameValid = hasValue(form.elements["username"], NAME_REQUIRED);
 	let passwordValid = validatePassword(form.elements["password"], PASSWORD_REQUIRED, PASSWORD_INVALID);
 
-  if (usernameValid && passwordValid) {
+	if (usernameValid && passwordValid) {
 		alert("Please enter Username and Password");
 		return true;
 	}
 
 	const response = await fetch('/api/users/login', {
-    method: 'POST',
-    body: JSON.stringify({ username, password }),
-    headers: { 'Content-Type': 'application/json' },
-  });
+		method: 'POST',
+		body: JSON.stringify({ username, password }),
+		headers: { 'Content-Type': 'application/json' },
+	});
 
-  if (response.ok) {
-    alert('Successfully log in')
-    document.location.replace('/');
-  } else {
-    alert('Failed to log in');
-  }
+	if (response.ok) {
+		alert('Successfully log in')
+		document.location.replace('/');
+	} else {
+		alert('Failed to log in');
+	}
 
 });
 

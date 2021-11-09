@@ -3,10 +3,17 @@ const { User } = require('../../models');
 
 // create a user
 router.post('/signup', (req, res) => {
+  req.session.username2 = undefined;
   console.log(req.body)
   User.create(req.body)
-    .then(user => res.json(user))
-    .catch(err=>console.log(err))
+    .then((user) => {
+      console.log('--------------'+JSON.stringify(user));
+      req.session.logged_in =false;
+      req.session.username = undefined;
+      req.session.username2 = user.username;
+      res.render('login')
+    })
+    .catch(err => console.log(err))
 })
 
 // login

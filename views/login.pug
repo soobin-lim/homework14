@@ -1,19 +1,19 @@
 extends layout.pug
 
 block content 
-
   .container.bg-light.m-0.p-2
     form(method='post', id='login')
       label(for="username" class='container-fluid p-0').text-dark Username
       br/
-      input(type='text', name="username" id="username" class='container-fluid p-0')
-
+      input(type='text', name="username" id="username" class='container-fluid p-0' value=username1)
+  
       br/
       <small></small>
       br/
       label(for="password" class='container-fluid p-0').text-dark Password 
       br/
       input(type='text', name="password" id="password" class='container-fluid p-0')
+      
       br/
       <small></small>
       br/

@@ -3,9 +3,9 @@ const name1 = form.elements['username'];
 const password1 = form.elements['password'];
 
 
-console.log(form)
-console.log(name1)
-console.log(password1)
+// console.log(form)
+// console.log(name1)
+// console.log(password1)
 
 
 
@@ -18,7 +18,7 @@ form.addEventListener('submit', async (event)=>{
   
 	let username = name1.value;
 	let password = password1.value;
-	console.log(username, password)
+	// console.log(username, password)
 
   let nameValid = hasValue(form.elements["username"], NAME_REQUIRED);
 	let passwordValid = validatePassword(form.elements["password"], PASSWORD_REQUIRED, PASSWORD_INVALID);

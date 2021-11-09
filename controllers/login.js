@@ -11,8 +11,8 @@ router.get('/', function (req, res, next) {
   res.render('login',
     {
       title: 'Express', 
-      nevbar_text: 'The Tech Blog ' + req.session.username,
-      username: req.session.username
+      nevbar_text: 'The Tech Blog ',
+      username1: req.session.username2
     });
 });
 
