@@ -3,8 +3,10 @@ const config = require('./config')
 require('dotenv').config();
 
 let sequelize;
-if (true ) {//config.use_env_variable
-  sequelize = new Sequelize(process.env[config.use_env_variable], config);
+if (process.env.JAWSDB_URL ) {//config.use_env_variable
+  // console.log(config.use_env_variable);
+  // sequelize = new Sequelize(process.env[config.use_env_variable], config);
+  sequelize = new Sequelize(process.env.JAWSDB_URL);
 } else {
   //   sequelize = new Sequelize(config.database, config.username, config.password, config);
   // }
