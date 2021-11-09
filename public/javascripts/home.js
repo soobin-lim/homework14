@@ -38,7 +38,9 @@ window.addEventListener('DOMContentLoaded', () => {
 
         const response = await fetch('/api/dashboard/createcomment', {
           method: 'POST',
-          body: JSON.stringify({ date, comment, username, blogId }),
+          body: JSON.stringify({ 
+            date, comment, username, blogId 
+          }),
           headers: { 'Content-Type': 'application/json' },
         });
       

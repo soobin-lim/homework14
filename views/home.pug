@@ -51,11 +51,26 @@ block content
 
       var comments = blog[5];
       //- console.log(comments.length);
+      console.log(comments)
       
       for (comment of comments) {
         var commentDiv = document.createElement('div');
-        commentDiv.innerHTML = comment;  
-        rowContainer.appendChild(commentDiv)
+        commentDiv.innerHTML = comment[0]; 
+        commentDiv.className = 'col'
+
+        var commentUpdatedAtDiv = document.createElement('div');
+        commentUpdatedAtDiv.innerHTML = comment[1];
+        commentUpdatedAtDiv.className = 'text-end col'
+
+        var commentUserIdDiv = document.createElement('div');
+        commentUserIdDiv.innerHTML = comment[2];
+        commentUserIdDiv.className = 'text-end col'
+        var commentRowDiv = document.createElement('div');
+        commentRowDiv.className = 'row'
+        commentRowDiv.appendChild(commentDiv)
+        commentRowDiv.appendChild(commentUpdatedAtDiv)
+        commentRowDiv.appendChild(commentUserIdDiv)
+        rowContainer.appendChild(commentRowDiv)
       }
 
       blogContainer.appendChild(rowContainer);

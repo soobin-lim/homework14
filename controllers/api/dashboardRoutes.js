@@ -2,30 +2,37 @@ const router = require('express').Router();
 const { User, Blog, Tag, BlogTag } = require('../../models');
 
 // create a blog post
-router.post('/createcomment', (req, res) => {
+router.post('/createcomment', async (req, res) => {
   const body = req.body
-  console.log(body)
-  // Creat Tag
-  Tag.create(
-    {
-      tag: body.comment,
-      user: 'user1'
-    }
-  )
-    .then(
-      // 
-      createdTag => {
-        var tagId = createdTag.id;
-        var blogId = body.blogId;
-        // Create BlogTag
-        BlogTag.create(
-          {
-            tagId: tagId,
-            blogId: blogId
-          }
-        )
-      }
-    )
+
+  let username = req.session.username
+
+  User.findOne({ where: { username: username } })
+    .then(user => {
+      console.log(user.id)
+      body.userId = user.id
+    })
+    .then(async () => {
+      // Create Tag
+      await Tag.create(
+        {
+          tag: body.comment,
+          userId: body.userId
+        }
+      ).then(
+        createdTag => {
+          var tagId = createdTag.id;
+          var blogId = body.blogId;
+          // Create BlogTag
+          BlogTag.create(
+            {
+              tagId: tagId,
+              blogId: blogId,
+            }
+          )
+        }
+      )
+    })
     .then(
       res.status(200)
         .json(
@@ -51,13 +58,15 @@ router.post('/create', (req, res) => {
   //   .spread((tag, created) => tag))
   User.findOne({ where: { username: username } })
     .then(user => {
-      console.log(user.id)
+      // get user's id with username
+      // console.log(user.id)
       body.userId = user.id
-      console.log(body)
+      // console.log(body)
     })
     .then(async () => {
       await Blog.create(
         {
+          // Create a Blog(title, content) with user's id
           title: body.title,
           content: body.content,
           userId: body.userId

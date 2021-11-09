@@ -6,5 +6,6 @@ module.exports = (sequelize, type) => {
         autoIncrement: true
       },
       tag: type.STRING
+      // userId: type.INTEGER is generated automatically
   })
 }
