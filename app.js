@@ -36,7 +36,7 @@ app.use('/css2', express.static(path.join(__dirname, 'public/stylesheets/')))
 // using controller(router)
 app.use(require('./controllers')); 
 
-sequelize.sync({ force: true })
+sequelize.sync({ force: false })
   .then(() => {
     console.log(`Database & tables created!`)
   }).catch(err => console.log('sequelize sync force error  :  '+err))
