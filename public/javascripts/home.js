@@ -1,6 +1,5 @@
-let alreadyAddingComment = false;
-
 window.addEventListener('DOMContentLoaded', () => {
+  let alreadyAddingComment = false;
   var allA = document.querySelectorAll("div[id='main'] a");
   for (a of allA) {
     a.className = 'menu_links text-light'
@@ -46,33 +45,28 @@ window.addEventListener('DOMContentLoaded', () => {
 
         console.log(e.target + ' is clicked')
         var blogId = row.getAttribute("data-blogid");
-
-        var date = '2021-11-07'
+        
         console.log('input value : ' + input.value);
         var comment = input.value
         console.log('user : ' + 'temp-username');
         var username = 'temp-username'
-
+        if (comment == '' || username == '' || blogId =='' || username == undefined){
+          alert('HTML Error - or - please enter comment - and .. refresh the page')
+          return;
+        }
         const response = await fetch('/api/dashboard/createcomment', {
           method: 'POST',
           body: JSON.stringify({
-            date, comment, username, blogId
+            comment, username, blogId
           }),
           headers: { 'Content-Type': 'application/json' },
         });
-
         if (response.ok) {
           alert('Successfully created a comment')
           document.location.replace('/');
         } else {
           alert('Failed to create a comment');
         }
-
       });
-    }
-    ,
-
-    )
-  }
-
+    })}
 });
