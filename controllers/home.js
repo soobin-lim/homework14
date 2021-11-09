@@ -1,10 +1,12 @@
 var express = require('express');
 var helpers = require('../utils/helpers')
+const withAuth = require('../utils/auth');
+
 const { Blog, User, Tag } = require('../models');
 var router = express.Router();
 
 /* GET home page. */
-router.get('/', async function (req, res, next) {
+router.get('/', withAuth, async function (req, res, next) {
   let blogsArray = [];
 
   let blogs = await Blog.findAll({

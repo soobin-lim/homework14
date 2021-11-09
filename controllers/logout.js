@@ -3,8 +3,11 @@ var router = express.Router();
 
 /* GET home page. */
 router.get('/', function (req, res, next) {
+  let goodByeName = req.session.username;
   req.session.username = undefined;
-
+  if (goodByeName == ''){
+    res.redirect('/login')
+  }
   if (req.session.username == undefined) {
     req.session.username = '';
   }
@@ -13,7 +16,7 @@ router.get('/', function (req, res, next) {
     {
       title: 'Express', 
       nevbar_text: 'The Tech Blog ' + req.session.username,
-      username: req.session.username
+      username: goodByeName
     });
 });
 
