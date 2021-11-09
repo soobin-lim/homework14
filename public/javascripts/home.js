@@ -60,13 +60,13 @@ window.addEventListener('DOMContentLoaded', () => {
             comment, username, blogId
           }),
           headers: { 'Content-Type': 'application/json' },
-        });
+        })
         if (response.ok) {
           alert('Successfully created a comment')
           document.location.replace('/');
         } else {
           alert('Failed to create a comment');
         }
-      });
+      })
     })}
-});
+})

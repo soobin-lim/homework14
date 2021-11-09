@@ -1,4 +1,4 @@
-window.addEventListener('DOMContentLoaded', (event) => {
+window.addEventListener('DOMContentLoaded', () => {
 	const form = document.getElementById('dashboard_create');
 	const newpostBtn = document.getElementById('newpost_btn')
 
@@ -107,9 +107,11 @@ window.addEventListener('DOMContentLoaded', (event) => {
 
 			// why this address working good?   - not using http://localhost:3000/
 
-			var blogData = await fetch('/api/blog/byid/' + blogId, {
-				method: 'GET',		// here can't I have head ? I guess
-			});
+			var blogData = await fetch('/api/blog/byid/' + blogId,
+				{
+					method: 'GET',		// here can't I have head ? I guess
+				}
+			)
 			const json = await blogData.json();
 			blogData = json;
 
@@ -166,26 +168,24 @@ window.addEventListener('DOMContentLoaded', (event) => {
 				} else {
 					alert('Failed to delete a comment');
 				}
-			});
+			})
 
 			updateButton.addEventListener('click', async (e) => {
 				e.preventDefault();
 				console.log(e.target + ' is clicked')
 				var blogId = rowElement.getAttribute("data-blogid");
 
-				var date = '2021-11-07'
 				console.log('title : ' + input.value)
 				var title = input.value;
 				console.log('content : ' + input2.value);
 				var content = input2.value
 				console.log('user : ' + 'temp-username');
-				var username = 'temp-username'
 
 				const response = await fetch('/api/blog/', {
 					method: 'PUT',
-					body: JSON.stringify({ date, title, content, blogId }),
+					body: JSON.stringify({ title, content, blogId }),
 					headers: { 'Content-Type': 'application/json' },
-				});
+				})
 
 				if (response.ok) {
 					alert('Successfully updated a blog')
@@ -194,9 +194,7 @@ window.addEventListener('DOMContentLoaded', (event) => {
 					alert('Failed to create a comment');
 				}
 
-			});
+			})
 		})
 	}
-
-
-});
+})
