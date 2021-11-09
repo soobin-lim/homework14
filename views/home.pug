@@ -26,11 +26,11 @@ block content
       titleA.innerHTML = blog[0];
       //- titleA.href="my link to .. custom"
       var usernameDiv = document.createElement('div');
-      usernameDiv.className = 'text-light bg-dark h6 m-0 col';
+      usernameDiv.className = 'text-light bg-dark h6 m-0 col w-100 d-flex justify-content-end';
       var usernameP = document.createElement('p');
-      usernameP.className = 'text-end m-0';
+      usernameP.className = 'd-inline-flex p-2 pb-0 pt-0 mb-0';
       var createdAtP = document.createElement('p');
-      createdAtP.className = 'text-end m-0';
+      createdAtP.className = 'd-inline-flex p-2 pb-0 pt-0 mb-0';
       var contentDiv = document.createElement('div');
       contentDiv.className = 'border border-dark h5 m-0 w-100';
       //- usernameDiv.innerHTML = 'Posted by ' + blog[1];
@@ -56,17 +56,19 @@ block content
       for (comment of comments) {
         var commentDiv = document.createElement('div');
         commentDiv.innerHTML = comment[0]; 
-        commentDiv.className = 'col'
+        commentDiv.className = 'p-1 mr-auto w-100'
 
         var commentUpdatedAtDiv = document.createElement('div');
         commentUpdatedAtDiv.innerHTML = comment[1];
-        commentUpdatedAtDiv.className = 'text-end col'
+        commentUpdatedAtDiv.className = 'p-1'
 
         var commentUserIdDiv = document.createElement('div');
         commentUserIdDiv.innerHTML = comment[2];
-        commentUserIdDiv.className = 'text-end col'
+        commentUserIdDiv.className = 'p-1'
+
         var commentRowDiv = document.createElement('div');
-        commentRowDiv.className = 'row'
+        commentRowDiv.className = 'd-flex w-100'
+
         commentRowDiv.appendChild(commentDiv)
         commentRowDiv.appendChild(commentUpdatedAtDiv)
         commentRowDiv.appendChild(commentUserIdDiv)

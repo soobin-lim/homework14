@@ -1,4 +1,5 @@
 var express = require('express');
+var helpers = require('../utils/helpers')
 const { Blog, User, Tag } = require('../models');
 var router = express.Router();
 
@@ -18,7 +19,7 @@ router.get('/', async function (req, res, next) {
       tmp.push(blog.content);
       tmp.push(blog.id);
       // tmp.push(blog.createdAt);
-      tmp.push(blog.updatedAt);
+      tmp.push(helpers.format_date(blog.updatedAt));
 
       let comments = await Tag.findAll(
         {
@@ -63,7 +64,7 @@ router.get('/', async function (req, res, next) {
 
           commentTagUsernameUpdatedAt.push(username)
 
-          commentTagUsernameUpdatedAt.push(comment.updatedAt)
+          commentTagUsernameUpdatedAt.push(helpers.format_date(comment.updatedAt))
           // console.log(comment.blogs.title)
           // console.log(comment.blogs.content)
           // console.log(comment.blogs.userId)

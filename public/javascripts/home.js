@@ -1,3 +1,4 @@
+let alreadyAddingComment = false;
 
 window.addEventListener('DOMContentLoaded', () => {
   var allA = document.querySelectorAll("div[id='main'] a");
@@ -7,10 +8,12 @@ window.addEventListener('DOMContentLoaded', () => {
     a.style = "cursor: pointer;"
     a.style.textDecoration = 'none'
     a.addEventListener('click', (e) => {
+
       console.log(e.target.parentElement.parentElement);
       var row = e.target.parentElement.parentElement;
       var form = document.createElement('form')
       form.className = 'border border-3'
+      form.id = 'form1'
       var label = document.createElement('label')
       label.className = 'container-fluid p-0 text-dark m-1'
       label.innerHTML = 'Comment'
@@ -22,11 +25,25 @@ window.addEventListener('DOMContentLoaded', () => {
       form.appendChild(label);
       form.appendChild(input);
       form.appendChild(button);
+
+      if (alreadyAddingComment) {
+        var elem = document.getElementById('form1');
+        elem.parentNode.removeChild(elem);
+        // document.getElementById('form1').style.display='none';
+        alreadyAddingComment = false;
+        return;
+      }
+
+      alreadyAddingComment = true;
+      form.style.display = 'block';
       row.appendChild(form);
-     
 
       button.addEventListener('click', async (e) => {
         e.preventDefault();
+
+        alreadyAddingComment = false;
+        form.style.display = 'none';
+
         console.log(e.target + ' is clicked')
         var blogId = row.getAttribute("data-blogid");
 
@@ -38,12 +55,12 @@ window.addEventListener('DOMContentLoaded', () => {
 
         const response = await fetch('/api/dashboard/createcomment', {
           method: 'POST',
-          body: JSON.stringify({ 
-            date, comment, username, blogId 
+          body: JSON.stringify({
+            date, comment, username, blogId
           }),
           headers: { 'Content-Type': 'application/json' },
         });
-      
+
         if (response.ok) {
           alert('Successfully created a comment')
           document.location.replace('/');
@@ -52,7 +69,10 @@ window.addEventListener('DOMContentLoaded', () => {
         }
 
       });
-    })
+    }
+    ,
+
+    )
   }
 
 });

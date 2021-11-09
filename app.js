@@ -30,7 +30,7 @@ app.set('views', './views');
 
 app.use(logger('dev'));
 app.use(express.json());
-app.use(express.urlencoded({ extended: false }));
+app.use(express.urlencoded({ extended: false })); // in exercises it was true, what this is mean?
 app.use(cookieParser());
 app.use(express.static(path.join(__dirname, 'public')));
 app.use('/css2', express.static(path.join(__dirname, 'public/stylesheets/')))

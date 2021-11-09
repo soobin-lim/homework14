@@ -1,4 +1,6 @@
 var express = require('express');
+var helpers = require('../utils/helpers')
+
 const { Blog, User, Tag } = require('../models');
 
 var router = express.Router();
@@ -20,7 +22,7 @@ router.get('/', async function (req, res, next) {
       tmp.push(blog.content);
       tmp.push(blog.id);
       // tmp.push(blog.createdAt)
-      tmp.push(blog.updatedAt);
+      tmp.push(helpers.format_date(blog.updatedAt));
       // console.log(blog.createdAt)
       // console.log(tmp)
       console.log("blog.id : " + blog.id)
