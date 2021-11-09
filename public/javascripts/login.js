@@ -30,7 +30,7 @@ form.addEventListener('submit', async (event)=>{
     alert('Successfully log in')
     document.location.replace('/');
   } else {
-    alert('Failed to sign up');
+    alert('Failed to log in');
   }
 
 });
