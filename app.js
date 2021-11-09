@@ -5,8 +5,6 @@ var cookieParser = require('cookie-parser');
 var logger = require('morgan');
 const session = require('express-session');
 
-const passport = require('passport')
-
 const sequelize = require('./config/connection')
 var app = express(); 
 
@@ -38,7 +36,7 @@ app.use('/css2', express.static(path.join(__dirname, 'public/stylesheets/')))
 // using controller(router)
 app.use(require('./controllers')); 
 
-sequelize.sync({ force: false })
+sequelize.sync({ force: true })
   .then(() => {
     console.log(`Database & tables created!`)
   }).catch(err => console.log('sequelize sync force error  :  '+err))

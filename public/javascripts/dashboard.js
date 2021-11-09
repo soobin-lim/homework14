@@ -36,7 +36,10 @@ window.addEventListener('DOMContentLoaded', () => {
 			alert("Please enter title and content");
 			return true;
 		}
-
+		if (title == '' || content == '' || title ==undefined || content == undefined){
+			alert('HTML Error - or - please enter title and content - and .. refresh the page')
+			return;
+		}
 		const response = await fetch('/api/dashboard/create', {
 			method: 'POST',
 			body: JSON.stringify({ title, content }),
