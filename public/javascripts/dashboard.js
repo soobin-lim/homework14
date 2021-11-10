@@ -100,15 +100,6 @@ window.addEventListener('DOMContentLoaded', () => {
 
 			console.log(blogId);
 
-			// const getTerms = async () => {
-			// 	const result = await fetch('/api/terms', {
-			// 		method: 'GET',
-			// 	});
-			// 	const json = await result.json();
-			// 	return json;
-			// };
-
-			// why this address working good?   - not using http://localhost:3000/
 
 			var blogData = await fetch('/api/blog/byid/' + blogId,
 				{

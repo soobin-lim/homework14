@@ -43,11 +43,6 @@ router.post('/createcomment', async (req, res) => {
     );
 
 })
-// .then(blog => Promise.all(tags).then(storedTags => blog.addTags(storedTags)).then(() => blog))
-// .then(blog => Blog.findOne({ where: { id: blog.id }, include: [User, Tag] }))
-// .then(blogWithAssociations => res.json(blogWithAssociations))
-// .catch(err => res.status(400).json({ err: `User with username = [${username}] doesn\'t exist.` }))
-
 
 // create a blog post
 router.post('/create', (req, res) => {
